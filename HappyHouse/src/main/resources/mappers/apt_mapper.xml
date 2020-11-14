@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mappers/emp.xml -->
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AptMapper"> <!-- mybatis는 namespace필수!! -->
+	<select id="searchAll" parameterType="hashMap"
+		resultType="com.ssafy.happyhouse.dto.HouseDeal">
+		select * from housedeal
+		order by no asc
+		limit #{start}, #{last}
+	</select>
+	
+	<!--totalcount set -->
+	<select id="getTotalCount" resultType="int">
+		select count(no) from housedeal
+	</select>
+		<select id="getTotalCountdong" resultType="int">
+		select count(no) from housedeal 
+		where dong like CONCAT('%',#{dong},'%')
+	</select>
+		<select id="getTotalCountname" resultType="int">
+		select count(no) from housedeal
+		where aptName like CONCAT('%',#{aptName},'%')
+	</select>
+	
+	<select id="searchAptName" parameterType="hashMap"
+		resultType="com.ssafy.happyhouse.dto.HouseDeal">
+		select * from housedeal
+		where aptName like CONCAT('%',#{aptName},'%')
+		order by no asc
+		limit #{start}, #{last}
+	</select>
+	
+	<select id="searchDong" parameterType="hashMap"
+		resultType="com.ssafy.happyhouse.dto.HouseDeal">
+		select * from housedeal
+		where dong like CONCAT('%',#{dong},'%')
+		order by no asc
+		limit #{start}, #{last}
+	</select>
+	
+	<select id="show" parameterType="int"
+		resultType="com.ssafy.happyhouse.dto.HouseDeal">
+		select * from housedeal
+		where no = #{no}
+		order by no asc
+	</select>
+	
+	<select id="getInfo" parameterType="String"
+		resultType="com.ssafy.happyhouse.dto.HouseInfo">
+		select * from houseinfo 
+		where aptName = #{aptName}
+	</select>
+	
+	<select id="auto" parameterType="String" resultType="String">
+		select aptName from houseinfo 
+		where aptName like CONCAT('%',#{term},'%')
+	</select>
+</mapper>

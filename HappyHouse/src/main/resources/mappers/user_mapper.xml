@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mappers/emp.xml -->
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper"> <!-- mybatis는 namespace필수!! -->
+	<insert id = "insert" parameterType="com.ssafy.happyhouse.dto.MemberDto">
+		insert into user values(#{id}, #{name}, #{password}, #{addr}, #{phone})
+	</insert>
+
+	<select id = "login" resultType="com.ssafy.happyhouse.dto.MemberDto" parameterType="java.util.Map">
+		select * from user
+		where id = #{param1} and password =#{param2} 
+	</select>
+	
+	<select id = "getInfo" resultType = "com.ssafy.happyhouse.dto.MemberDto" parameterType = "java.lang.String">
+		select * from user
+		where id = #{userid}
+	</select>
+	
+	<update id = "modify" parameterType="com.ssafy.happyhouse.dto.MemberDto">
+		update user
+		set name = #{name}, password = #{password}, addr= #{addr}, phone = #{phone} 
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from user where id = #{id}
+	</delete>
+</mapper>
+
